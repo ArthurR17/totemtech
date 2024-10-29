@@ -2,7 +2,7 @@
 let img = document.getElementById('trilha');
 let isDragging = false;
 let startX, startY, currentX = 0, currentY = 0;
-
+//Oi
 // Função para centralizar a imagem na tela
 function resetImagePosition() {
     img.style.transition = 'transform 0.3s ease';
