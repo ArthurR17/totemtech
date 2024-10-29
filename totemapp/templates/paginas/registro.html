@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% load static %}
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Registro de Curso</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static 'totemapp/registro.css' %}'>
+    <script src="{% static 'totemapp/js/temporizador.js' %}"></script>
+    <script>
+        var urlTelaInterativa = "{% url 'tela_inicial' %}"
+    </script>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <a href="{% url 'menu_opcoes' %}"><button class="btn_voltar"><i class="fas fa-arrow-left"></i>Voltar</button></a>
+
+    <div class="backgroundLeft">
+        <img src="{% static 'totemapp/images/background-left.svg' %}">
+    </div>
+
+
+
+    <div class="container">
+
+        <div class="logo-container">
+            <img src="{% static 'totemapp/images/thumbnail_logo.png' %}" alt="Logo" class="logo">
+        </div>
+
+        <!-- Modal de Login para Administradores -->
+        {% if mostrar_modal %}
+        <div id="adminModal" class="modal" style="display: block;">
+            <div class="modal-content">
+                <h2>Acesso restrito a administradores</h2>
+                <p>Por favor, faça login para continuar.</p>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Login" required>
+                    <input type="password" name="password" placeholder="Senha" required>
+                    <button type="submit">Entrar</button>
+                </form>
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if not mostrar_modal %}
+        <div class="form-container">
+            <form>
+                <p><input type="text" name="nome" placeholder="Nome do Curso"></p>
+                <p><input type="text" name="id" placeholder="ID"></p>
+                <p>
+                    <select name="modalidade" id="modalidade">
+                        <option>Modalidade</option>
+                        <option>Presencial</option>
+                        <option>A Distância</option>
+                    </select>
+                </p>
+                <p>
+                    <select name="nivel" id="nivel">
+                        <option>Nível</option>
+                        <option>Cursos Técnicos</option>
+                        <option>Cursos Livres</option>
+                        <option>Aprendiz SENAI</option>
+                        <option>Graduação</option>
+                        <option>Pós-graduação</option>
+                        <option>Superior Extensão</option>
+                    </select>
+                </p>
+                <p>
+                    <select name="area" id="area">
+                        <option>Área</option>
+                        <option>Tecnologia da Informação e Informática</option>
+                        <option>Administração e Gestão</option>
+                        <option>Alimentos e Bebidas</option>
+                        <option>Metalurgia e Soldagem</option>
+                        <option>Design Gráfico, Papel, Celulose, Gráfica e Editorial</option>
+                    </select>
+                </p>
+                <p><input type="text" name="descricao" placeholder="Descrição"></p>
+                <p><input type="text" name="carga_horaria" placeholder="Carga Horária (em horas)"></p>
+                <p><input type="text" name="grade_curricular" placeholder="Grade Curricular"></p>
+                <p><input type="text" name="requisitos" placeholder="Requisitos"></p>
+            </form>
+        </div>
+
+
+        <div class="button-container">
+            <button class="register-button">Registrar</button>
+        </div>
+
+        {% endif %}
+
+
+        <div class="backgroundRight">
+            <img src="{% static 'totemapp/images/background-right.svg' %}">
+        </div>
+    </div>
+
+</body>
+</html>
